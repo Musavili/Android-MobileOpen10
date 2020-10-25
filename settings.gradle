@@ -1,2 +1,3 @@
+include ':open10registrationandlogin'
 include ':app'
 rootProject.name = "MobileOpen10"
