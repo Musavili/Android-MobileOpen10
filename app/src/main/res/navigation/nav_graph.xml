@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.musavili.application.mobileopen10.HomescreenFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_candidateFragment2"
+            app:destination="@id/candidateFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.musavili.application.mobileopen10.JobsFragment"
+        android:label="fragment_jobs"
+        tools:layout="@layout/fragment_jobs" >
+        <action
+            android:id="@+id/action_jobsFragment_to_jobs2Fragment2"
+            app:destination="@id/jobs2Fragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/candidateFragment2"
+        android:name="com.musavili.application.mobileopen10.CandidateFragment"
+        android:label="fragment_candidate"
+        tools:layout="@layout/fragment_candidate" >
+        <action
+            android:id="@+id/action_candidateFragment2_to_candidateFragment22"
+            app:destination="@id/candidateFragment22" />
+    </fragment>
+    <fragment
+        android:id="@+id/candidateFragment22"
+        android:name="com.musavili.application.mobileopen10.CandidateFragment2"
+        android:label="fragment_candidate2"
+        tools:layout="@layout/fragment_candidate2" />
+    <fragment
+        android:id="@+id/jobs2Fragment2"
+        android:name="com.musavili.application.mobileopen10.Jobs2Fragment"
+        android:label="fragment_jobs2"
+        tools:layout="@layout/fragment_jobs2" />
+</navigation>
