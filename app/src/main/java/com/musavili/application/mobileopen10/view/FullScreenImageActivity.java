@@ -17,8 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
-import alessandro.firebaseandroid.R;
-import alessandro.firebaseandroid.adapter.CircleTransform;
+import com.musavili.application.mobileopen10.R;
+import com.musavili.application.mobileopen10.adapter.CircleTransform;
 
 public class FullScreenImageActivity extends AppCompatActivity {
 
@@ -81,7 +81,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
             @Override
             public void onLoadStarted(Drawable placeholder) {
-                progressDialog.setMessage("Carregando Imagem...");
+                progressDialog.setMessage("Loading Image...");
                 progressDialog.show();
             }
 

@@ -1,5 +1,6 @@
 package com.musavili.application.mobileopen10;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(chatIntent);
             }
         });
     }
@@ -53,5 +54,10 @@ public class MainActivity extends AppCompatActivity {
         
 
       //  return super.onOptionsItemSelected(item);
+    }
+
+    public void openChat(MenuItem item) {
+        Intent chatIntent = new Intent(this, ChatActivity.class);
+        startActivity(chatIntent);
     }
 }
