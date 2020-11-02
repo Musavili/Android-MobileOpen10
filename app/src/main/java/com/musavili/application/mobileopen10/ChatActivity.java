@@ -122,6 +122,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                     sendFileFirebase(storageRef, selectedImageUri);
                 } else {
                     //URI IS NULL
+                    Log.d(TAG, "URI is null");
                 }
             }
         } else if (requestCode == IMAGE_CAMERA_REQUEST) {
@@ -131,6 +132,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                     sendFileFirebase(imageCameraRef, filePathImageCamera);
                 } else {
                     //IS NULL
+                    Log.d(TAG, "is null");
                 }
             }
         } else if (requestCode == PLACE_PICKER_REQUEST) {
@@ -143,6 +145,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
                 } else {
                     //PLACE IS NULL
+                    Log.d(TAG, "place is null");
                 }
             }
         }
@@ -227,10 +230,17 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Log.i(TAG,"onSuccess sendFileFirebase");
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        FileModel fileModel = new FileModel("img",downloadUrl.toString(),name,"");
-                        ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
-                        mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
+
+                        imageGalleryRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Uri downloadUrl = uri;
+                                FileModel fileModel = new FileModel("img",downloadUrl.toString(),name,"");
+                                ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
+                                mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
+                            }
+                         });
+
                     }
                 });
         }else{
@@ -240,7 +250,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Envia o arvquivo para o firebase
+     * Send the file to firebase
      */
     private void sendFileFirebase(StorageReference storageReference, final File file){
         if (storageReference != null){
@@ -257,20 +267,26 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.i(TAG,"onSuccess sendFileFirebase");
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),file.getName(),file.length()+"");
-                    ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
-                    mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
+                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Uri downloadUrl = uri;
+                            FileModel fileModel = new FileModel("img",downloadUrl.toString(),file.getName(),file.length()+"");
+                            ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
+                            mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
+                        }
+                    });
                 }
             });
         }else{
             //IS NULL
+            Log.d(TAG, " is null");
         }
 
     }
 
     /**
-     * Obter local do usuario
+     * Get user location
      */
     private void locationPlacesIntent(){
         try {
@@ -282,7 +298,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Enviar foto tirada pela camera
+     * Send photos taken by camera
      */
     private void photoCameraIntent(){
         String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
