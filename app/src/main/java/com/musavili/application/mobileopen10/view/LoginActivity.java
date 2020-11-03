@@ -1,5 +1,6 @@
 package com.musavili.application.mobileopen10.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.musavili.application.mobileopen10.ChatActivity;
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         if (!Util.checkConnection(this)){
-            Util.initToast(this,"Você não tem conexão com internet");
+            Util.initToast(this,"You have no internet connection");
             finish();
         }
 
@@ -63,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
-
     }
 
     @Override
@@ -78,6 +79,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG, "Google Sign In failed.");
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+        //updateUI(currentUser);
     }
 
     @Override

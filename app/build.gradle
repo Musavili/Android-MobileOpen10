@@ -45,8 +45,9 @@ dependencies {
     implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
 
     // AUTH
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-auth'
 
     //DATABASE FIREBASE,UI
     implementation 'com.google.firebase:firebase-database:19.5.1'
