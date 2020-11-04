@@ -29,22 +29,51 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.13.1'
+    //testImplementation 'junit:junit:4.+'
+
+    //SUPPORT ANDROID
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+
+    //IMAGE LOAD
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //CHAT UI
+    implementation 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
+    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+
+    // AUTH
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-auth'
+
+    //DATABASE FIREBASE,UI
+    implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.1'
+
+    //STORAGE FIREBASE
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
+
+    //Places SERVICES
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.+'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    def nav_version = "2.1.0-alpha06"
+    def nav_version = "2.3.1"
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
 }
+apply plugin: 'com.google.gms.google-services'
